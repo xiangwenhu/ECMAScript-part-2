@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <script>
+        function isSomeObject(source, target) {
+            let prototype = Object.getPrototypeOf(source);
+            while (prototype) {
+                if (prototype == target) return true;
+                prototype = Object.getPrototypeOf(prototype)
+            }
+            return false;
+        }
+
+        function isEventTart(source){
+            return isSomeObject(source, EventTarget)
+        }
+
+        isEventTart(XMLHttpRequest);
+        isEventTart(window);
+        isEventTart(HTMLDivElement);
+    </script>
+
+</body>
+
+</html>

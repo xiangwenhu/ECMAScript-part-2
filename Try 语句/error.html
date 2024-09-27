@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<>
+
+
+    <script>
+        // error onerror
+
+        // window.addEventListener('error', function (event) {
+        //     console.error('全局错误 error:', event);
+        //     // 错误处理逻辑
+        // }, true);
+        // window.onerror = function (errorMessage, fileName, lineNumber, columnNumber, error) {
+        //     console.error('全局错误 onerror:', errorMessage, '文件:', fileName, '行号:', lineNumber, '列号:', columnNumber, '错误对象:', error);
+        //     // 返回true阻止默认错误处理行为
+        //     return true;
+        // };
+
+        // window.xxx.yy
+    </script>
+
+
+    <script>
+        // PromiseRejectionEvent
+
+        // window.addEventListener('unhandledrejection', function (event) {
+        //     console.error('捕获到一个未被捕获的Promise的异常:', event.reason);
+        //     // 错误处理逻辑
+        // }, false);
+
+        // Promise.reject(new Error("promise error"))
+    </script>
+
+    <!-- <script>
+        // XMLHttpRequest
+
+        const xhr = new XMLHttpRequest();
+        xhr.onerror = function (err) {
+            console.log("xhr onerror:", err.target.status, err.target.statusText)
+        }
+        xhr.addEventListener("error", function (err) {
+            console.log("xhr error:", err.target.status, err.target.statusText)
+        })
+        xhr.open("get", "https://wwww.xxxxxxx.com");
+        xhr.send();
+
+    </script> -->
+
+
+    <!-- <script>
+        fetch("https://wwww.xxxxxxx.com").catch(err=>{
+            console.log('fetch error:', err)
+        })
+    </script> -->
+</body>
+
+</html>
