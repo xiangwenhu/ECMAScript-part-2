@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        function logError(error) {
+            // 序列化错误信息
+            const errorData = {
+                message: error.message,
+                url: window.location.href,
+                line: error.lineNumber,
+                column: error.columnNumber,
+                stack: error.stack
+            };
+
+            // 将错误信息转换为URL编码的查询字符串
+            const queryString = Object.keys(errorData)
+                .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(errorData[key])}`)
+                .join('&');
+
+            // 构造图片上报的URL
+            const reportUrl = `https://yourserver.com/view.gif?${queryString}`;
+
+            // 创建一个1x1像素的透明图片
+            const img = new Image();
+            img.src = reportUrl;
+            img.width = 1;
+            img.height = 1;
+            img.style.display = 'none';
+
+            // 将图片添加到DOM中，触发请求
+            document.body.appendChild(img);
+
+            // 错误上报后，可以移除图片元素
+            img.onload = img.onerror = () => {
+                img.parentNode.removeChild(img);
+            };
+        }
+
+        // 绑定错误处理函数
+        window.onerror = function (message, source, lineno, colno, error) {
+            logError({ message, source, lineno, colno, stack: error.stack });
+        };
+
+    </script>
+
+    <script>
+        throw new Error('测试错误')
+    </script>
+</body>
+
+</html>

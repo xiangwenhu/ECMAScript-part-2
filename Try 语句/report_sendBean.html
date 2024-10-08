@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        function logError(error) {
+            const searchParams = new URLSearchParams(error);
+            // 上报的URL
+            const reportUrl = `https://yourserver.comxxxxxxxxxxxxxxxx/log`;
+            try {
+                navigator.sendBeacon(reportUrl, searchParams)
+            } catch (err) {
+                // 捕获不到 sendBeacon的错误
+                console.error("sendBeacon error:", err)
+            }
+        }
+
+        // 绑定错误处理函数
+        window.onerror = function (message, source, lineno, colno, error) {
+            logError({ message, source, lineno, colno, stack: error.stack });
+        };
+
+    </script>
+
+    <script>
+        window.addEventListener("error", (ev) => {
+            console.error("error", ev)
+        }, true)
+    </script>
+
+    <script>
+        throw new Error('测试错误')
+    </script>
+</body>
+
+</html>

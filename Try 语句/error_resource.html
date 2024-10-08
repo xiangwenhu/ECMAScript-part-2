@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <script>
+        // error onerror
+
+        window.addEventListener('error', function (event) {
+            console.error('全局 error:', event);
+            const node = event.target;
+            const tagName = node.tagName;
+            switch(tagName){
+                case "SCRIPT":
+                    console.log(tagName, node.src)
+            }
+            // 错误处理逻辑
+        }, true);
+        window.onerror = function (errorMessage, fileName, lineNumber, columnNumber, error) {
+            console.error('全局错误 onerror:', errorMessage, '文件:', fileName, '行号:', lineNumber, '列号:', columnNumber, '错误对象:', error);
+            // 返回true阻止默认错误处理行为
+            return true;
+        };
+
+    </script>
+    <script src="./不存在的.js" ></script>
+    <link  el="stylesheet" href="不存在的.css">
+
+
+
+</body>
+
+</html>

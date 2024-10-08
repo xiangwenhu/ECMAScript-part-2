@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        function logError(error) {
+            const searchParams = new URLSearchParams(error);
+
+            // 构造图片上报的URL
+            const reportUrl = `https://yourserver.com/log`;
+
+            fetch(`${reportUrl}?${searchParams.toString()}`, {
+                keepalive: true
+            })
+        }
+
+        // 绑定错误处理函数
+        window.onerror = function (message, source, lineno, colno, error) {
+            logError({ message, source, lineno, colno, stack: error.stack });
+        };
+
+    </script>
+
+    <script>
+        setTimeout(() => {
+            throw new Error('测试错误')
+        }, 0)
+    </script>
+</body>
+
+</html>
